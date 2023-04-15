@@ -10,6 +10,7 @@ from models.state import State
 from models.city import City
 from models.amenity import Amenity
 from models.review import Review
+from shlex import split
 
 
 class HBNBCommand(cmd.Cmd):
@@ -92,6 +93,24 @@ class HBNBCommand(cmd.Cmd):
             print('(hbnb) ', end='')
         return stop
 
+    def _key_value(self, args):
+        """Create key value pairs"""
+        new_dict = {}
+        my_list = args
+            
+        for i in range(1, len(my_list)):
+            key, value = tuple(my_list[i].split("="))
+            if value[0] == '"':
+                value = value.strip('"').replace("_", " ")
+            else:
+                try:
+                    value = eval(value)
+                except (SyntaxError, NameError):
+                    continue
+            new_dict[key] = value
+        return new_dict
+
+
     def do_quit(self, command):
         """ Method to exit the HBNB console"""
         exit()
@@ -115,16 +134,25 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, args):
         """ Create an object of any class"""
+        my_list = args.split(" ")
+
         if not args:
             print("** class name missing **")
             return
-        elif args not in HBNBCommand.classes:
+        elif my_list[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
-        new_instance = HBNBCommand.classes[args]()
-        storage.save()
+        new_dict = self._key_value(my_list)
+
+        if new_dict == {}:
+            new_insatnce = eval(my_list[0])()
+        else:
+            new_instance = eval(my_list[0])(**new_dict)
+            #HBNBCommand.classes[my_list[0]](**new_dict)
+
+        storage.new(new_instance)
         print(new_instance.id)
-        storage.save()
+        new_instance.save()
 
     def help_create(self):
         """ Help information for the create method """
