@@ -205,7 +205,7 @@ class HBNBCommand(cmd.Cmd):
             return
 
         if c_name not in HBNBCommand.classes:
-            print("** class doesn't exist **")
+            print("** class doesn't exist **clear")
             return
 
         if not c_id:
