@@ -30,3 +30,7 @@ class Place(BaseModel, Base):
         price_by_night = 0
         latitude = 0.0
         longitude = 0.0
+
+    def __init__(self, *args, **kwargs):
+        """initializes Places"""
+        super().__init__(*args, **kwargs)
