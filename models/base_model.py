@@ -6,18 +6,17 @@ import sqlalchemy
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 import models
+from models import storage
 
-if models.storage_t == "db":
-    Base = declarative_base()
-else:
-    Base = object
+Base = declarative_base()
+
 
 class BaseModel:
     """A base class for all hbnb models"""
-    if models.storage_t == "db":
-        id = Column(String(60), primary_key=True)
-        created_at = Column(DateTime, default=datetime.utcnow)
-        updated_at = Column(DateTime, default=datetime.utcnow)
+    
+    id = Column(String(60), primary_key=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow)
 
     def __init__(self, *args, **kwargs):
         """Instatntiates a new model"""
@@ -37,7 +36,7 @@ class BaseModel:
     def save(self):
 
         """Updates updated_at with current time when instance is changed"""
-        from models import storage
+        
         self.updated_at = datetime.now()
         storage.new(self)
         storage.save()
@@ -57,3 +56,9 @@ class BaseModel:
     def delete(self):
         """delete current instance from storage"""
         storage.delete(self)
+
+    def __str__(self):
+        """Return the print/str representation of the BaseModel instance."""
+        d = self.__dict__.copy()
+        d.pop("_sa_instance_state", None)
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, d)
