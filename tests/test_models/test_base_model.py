@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-"""Unit test for base model"""
-
-import json
-import models
-from datetime import datetime
+"""
+Unit Test for BaseModel Class
+"""
 import unittest
+from datetime import datetime
+import models
+import json
 
 BaseModel = models.base_model.BaseModel
 
