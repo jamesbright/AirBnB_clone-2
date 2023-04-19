@@ -15,7 +15,7 @@ else:
 
 class BaseModel:
     """A base class for all hbnb models"""
-    
+
     id = Column(String(60), primary_key=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
@@ -35,10 +35,11 @@ class BaseModel:
         """Returns a string representation of the instance"""
         cls = (str(type(self)).split('.')[-1]).split('\'')[0]
         return '[{}] ({}) {}'.format(cls, self.id, self.__dict__)
-    def save(self):
 
-        """Updates updated_at with current time when instance is changed"""
-        
+    def save(self):
+        """Updates updated_at with current time when instance is changed
+        """
+
         self.updated_at = datetime.now()
         models.storage.new(self)
         models.storage.save()
@@ -54,7 +55,7 @@ class BaseModel:
         if "_sa_instance_state" in dictionary:
             del dictionary["_sa_instance_state"]
         return dictionary
-    
+
     def delete(self):
         """delete current instance from models.storage"""
         models.storage.delete(self)

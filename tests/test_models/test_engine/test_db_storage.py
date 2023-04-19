@@ -20,7 +20,9 @@ from sqlalchemy.orm.session import Session
 from sqlalchemy.engine.base import Engine
 import pep8
 import unittest
-DBStorage = db_storage.DBStorage
+
+#DBStorage = models.engine.db_storage.DBStorage
+
 classes = {"Amenity": Amenity, "City": City, "Place": Place,
            "Review": Review, "State": State, "User": User}
 
