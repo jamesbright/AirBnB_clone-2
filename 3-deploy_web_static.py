@@ -10,7 +10,6 @@ from os.path import isdir
 env.hosts = ['52.86.31.49', '3.89.155.193']
 
 
-
 def do_pack():
     """generates a tgz archive from folders"""
     try:
