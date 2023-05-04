@@ -3,14 +3,14 @@
 fabric file that uploads and distributes archive to web servers
 """
 
-from os.path import exists
+import os.path
 from fabric.api import put, run, env
 env.hosts = ['52.86.31.49', '3.89.155.193']
 
 
 def do_deploy(archive_path):
     """uploads and decompresses an archive to a web server"""
-    if  exists(archive_path) is False:
+    if not os.path.isfile(archive_path):
         return False
     try:
         archive = archive_path.split("/")[-1]
