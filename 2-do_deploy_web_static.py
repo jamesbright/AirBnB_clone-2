@@ -10,7 +10,7 @@ env.hosts = ['52.86.31.49', '3.89.155.193']
 
 def do_deploy(archive_path):
     """uploads and decompresses an archive to a web server"""
-    if not exists(archive_path):
+    if  exists(archive_path) is False:
         return False
     try:
         archive = archive_path.split("/")[-1]
