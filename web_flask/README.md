@@ -11,9 +11,9 @@
 - How to create a dynamic template (loops, conditions…)
 - How to display in HTML data from a MySQL database
 
-if python file creates a flask server covering a specified task. below is some instruction on example files
+Each python file creates a flask server covering a specified task. below is some instruction on example files
 
-## Write a script that starts a Flask web application:
+## scripts that starts a Flask web application:
  - [0-hello_route](0-hello_route.py)
    - web application listening on 0.0.0.0, port 5000
    - Routes:
